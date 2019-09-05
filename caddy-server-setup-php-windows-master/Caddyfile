@@ -1,0 +1,25 @@
+localhost:2020 { 
+	root     ./  # <- root directory for this site  
+	gzip  # Compress the transmitted data 
+	
+	on startup c:\php7\php-cgi.exe -b 9999  & #it will run the exe command
+	
+	fastcgi / 127.0.0.1:9999 php  {
+		index    index.php
+	}
+	
+	# any direct access to these files should be denied 404
+	status 404 { 
+        	/autoload.php
+        	/composer.
+       		/config.php
+        	/eula.txt
+        	/eula_
+        	/CONTRIBUTING.md
+        	/UPGRADE-
+        	/README.md
+    	}
+	
+	errors ./error.log # error files 
+	log  ./access.log # access log file
+}
